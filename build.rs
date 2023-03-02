@@ -4,7 +4,9 @@ extern crate cmake;
 use std::{env, format, path::PathBuf};
 
 fn main() {
-    let dst = cmake::Config::new("SOEM").build();
+    let dst = cmake::Config::new("SOEM")
+        .cflag("-Wno-unused-but-set-variable")
+        .build();
 
     println!("cargo:rustc-link-search=native={}/lib", dst.display());
     println!("cargo:rustc-link-lib=static=soem");
